@@ -62,6 +62,8 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
+
   movements.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
@@ -74,6 +76,26 @@ const displayMovements = function (movements) {
 };
 
 displayMovements(account1.movements);
+
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, cur) => acc + cur, 0);
+
+  labelBalance.textContent = `${balance} EURO`;
+};
+
+calcDisplayBalance(account1.movements);
+
+const createUserNames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+
+createUserNames(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -167,3 +189,84 @@ displayMovements(account1.movements);
 // currenciesUnique.forEach(function (value, _, map) {
 //   console.log(`${value}: ${value}`);
 // });
+
+// const juliaData = [3, 5, 2, 12, 7];
+// const kateData = [4, 1, 15, 8, 3];
+
+// let checkDogs = (arr1, arr2) => {
+//   let newJulieArr = arr1.slice(1);
+//   newJulieArr.splice(-2);
+
+//   let animalsAges = newJulieArr.concat(arr2);
+
+//   console.log(animalsAges);
+//   animalsAges.forEach(function (age, i) {
+//     if (age >= 3) {
+//       console.log(`Dog number ${i + 1} is an adult and is ${age} years old`);
+//     } else {
+//       console.log(`Dog number ${i + 1} is still a puppy 🐶`);
+//     }
+//   });
+// };
+
+// checkDogs(juliaData, kateData);
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const eurToUsd = 1.1;
+
+// const movementsUSD = movements.map(mov => mov * eurToUsd);
+// console.log(movements);
+// console.log(movementsUSD);
+
+// const movementsUSDfor = [];
+// for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+// console.log(movementsUSDfor);
+
+// const movementsDesc = movements.map(
+//   (mov, i) =>
+//     `Movement: ${i + 1} - You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+//       mov
+//     )}`
+// );
+
+// console.log(movementsDesc);
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// // const deposits = movements.filter(function (mov) {
+// // return mov > 0;
+// // });
+
+// const deposits = movements.filter(mov => mov > 0);
+
+// console.log(movements);
+// console.log(deposits);
+
+// const depositsFor = [];
+// for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+// console.log(depositsFor);
+
+// const withdrawals = movements.filter(mov => mov < 0);
+// console.log(withdrawals);
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// // accumulator -> SNOWBALL
+// const balance = movements.reduce(function (acc, cur) {
+//   return acc + cur;
+// }, 0);
+// console.log(balance);
+
+// let balance2 = 0;
+// for (const mov of movements) balance2 += mov;
+// console.log(balance2);
+
+// Maximum value
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const maxValue = movements.reduce(
+  (acc, curr) => (acc < curr ? curr : acc),
+  movements[0]
+);
+console.log(maxValue);
